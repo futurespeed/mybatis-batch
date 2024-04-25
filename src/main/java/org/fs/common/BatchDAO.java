@@ -83,11 +83,11 @@ public class BatchDAO {
                         value = field.get(argument);
                     }
                     JdbcType jdbcType = mapping.getJdbcType();
-                    if (null == value || null == jdbcType) {
+                    if (null == value && null == jdbcType) {
                         jdbcType = this.sqlSessionFactory.getConfiguration().getJdbcTypeForNull();
                     }
                     TypeHandler typeHandler = mapping.getTypeHandler();
-                    typeHandler.setParameter(ps, i, argument, jdbcType);
+                    typeHandler.setParameter(ps, i, value, jdbcType);
                 }
             } catch (Exception e) {
                 throw new IllegalArgumentException("set statement value error", e);
